@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using Nethereum.ABI.Util;
+using Nethereum.Hex.HexTypes;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 using Servicio.Contracts.Contrato;
@@ -47,7 +49,10 @@ namespace Servicio
             var contractAddress = request.ContractAddress;
             var service = new ContratoService(web3, contractAddress);
             var currentStoredValue = await service.GetNumeroQueryAsync();
-            return currentStoredValue;
+            return new
+            {
+                numero = currentStoredValue.ToString()
+            };
         }
     }
 }
